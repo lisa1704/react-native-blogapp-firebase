@@ -1,21 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthStackScreen from "./src/navigation/AuthStack";
+import AppDrawerScreen from "./src/navigation/AppDrawer";
+import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
+import * as firebase from "firebase";
+//import firebase from 'firebase/app'
 
-export default function App() {
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyDQ1L8cdCs2aP4Rr49VxusQfn6Auq0s2m4",
+  authDomain: "blog-app-d2f62.firebaseapp.com",
+  databaseURL: "https://blog-app-d2f62-default-rtdb.firebaseio.com/",
+  projectId: "blog-app-d2f62",
+  storageBucket: "blog-app-d2f62.appspot.com",
+  messagingSenderId: "1023239892318",
+  appId: "1:1023239892318:web:8e6e51f79afbbd07f8f3cf"
+};
+
+if(!firebase.apps.length){
+firebase.initializeApp(firebaseConfig);
+}
+
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <AuthContext.Consumer>
+        {(auth) => (
+          <NavigationContainer>
+            {auth.IsLoggedIn ? <AppDrawerScreen /> : <AuthStackScreen />}
+          </NavigationContainer>
+        )}
+      </AuthContext.Consumer>
+    </AuthProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
