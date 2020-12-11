@@ -30,7 +30,6 @@ const HomeScreen = (props) => {
       .firestore()
       .collection('posts')
       .orderBy("createdAt","desc")
-      .doc(docRef.id)
       .onSnapshot((querySnapshot) => {
         let p_arr = [];
         querySnapshot.forEach((doc) => {
@@ -40,6 +39,7 @@ const HomeScreen = (props) => {
           });
         });
         setPosts(p_arr);
+        setLoading(false);
       }).catch((error) => {
         setLoading(false);
         alert(error);
