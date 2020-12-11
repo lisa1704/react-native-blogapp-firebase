@@ -16,17 +16,34 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 
 const HomeScreen = (props) => {
-  const netinfo = useNetInfo();
+  /*const netinfo = useNetInfo();
   if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
     alert("No Internet!");
-  }
+  } */
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
 
-  const loadPosts=()=>{
+  const loadPosts = async () => {
     setLoading(true);
-
+    firebase
+      .firestore()
+      .collection('posts')
+      .orderBy("createdAt","desc")
+      .doc(docRef.id)
+      .onSnapshot((querySnapshot) => {
+        let p_arr = [];
+        querySnapshot.forEach((doc) => {
+          p_arr.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        setPosts(p_arr);
+      }).catch((error) => {
+        setLoading(false);
+        alert(error);
+      });
   };
 
   useEffect(() => {
@@ -53,22 +70,24 @@ const HomeScreen = (props) => {
             <Button
               title="Post"
               type="outline"
-              onPress={function(){
+              onPress={function () {
                 setLoading(false);
-                firebase.firestore().collection('posts').add({
-                  userId: auth.currentUser.uid,
-                  body: input,
-                  author:auth.currentUser.displayName,
-                  createdAt: firebase.firestore.Timestamp.now(),
-                  likes:[],
-                  comments:[]
-                }).then(()=>{
-                  alert("Post created successfully");
-                  alert(auth.currentUser.uid);
-                }).catch((error)=>{
-                  setLoading(false);
-                  alert(error);
-                })
+                firebase
+                  .firestore()
+                  .collection('posts')
+                  .add({
+                    userId: auth.CurrentUser.uid,
+                    body: input,
+                    author: auth.CurrentUser.displayName,
+                    createdAt: firebase.firestore.Timestamp.now(),
+                    likes: [],
+                    comments: []
+                  }).then(function (doc) {
+                    alert("Post created with ID: " + doc.id);
+                  }).catch((error) => {
+                    setLoading(false);
+                    alert(error);
+                  })
               }}
             />
           </Card>
