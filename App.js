@@ -4,6 +4,7 @@ import AuthStackScreen from "./src/navigation/AuthStack";
 import AppDrawerScreen from "./src/navigation/AppDrawer";
 import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
 import * as firebase from "firebase";
+import * as eva from '@eva-design/eva';
 //import firebase from 'firebase/app'
 
 // Your web app's Firebase configuration

@@ -2,6 +2,8 @@ import React from "react";
 import { View } from "react-native";
 import { Card, Button, Text, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 const PostCard = (props) => {
   return (
@@ -34,10 +36,13 @@ const PostCard = (props) => {
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Button
           type="outline"
-          title="  Like (17)"
-          icon={<AntDesign name="like2" size={24} color="dodgerblue" />}
+          title=" Like "
+          icon={<Ionicons name="md-heart-empty" size={24} color="black" />}
         />
-        <Button type="solid" title="Comment (10)" />
+        <Button 
+        type="outline" 
+        title=" Comment " 
+        icon={<FontAwesome name="comments" size={24} color="black" />}/>
       </View>
     </Card>
   );

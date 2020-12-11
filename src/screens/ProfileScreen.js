@@ -13,23 +13,12 @@ const ProfileScreen = (props) => {
               props.navigation.toggleDrawer();
             }}
           />
-          <Card>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Avatar
-                containerStyle={{ backgroundColor: "cyan" }}
-                rounded
-                icon={{
-                  name: "thumbs-o-up",
-                  type: "font-awesome",
-                  color: "black",
-                }}
-                activeOpacity={1}
-              />
-              <Text style={{ paddingHorizontal: 10 }}>
-                {auth.CurrentUser.name} Liked Your Post.
-              </Text>
-            </View>
-          </Card>
+          <View>
+            <Avatar
+            avatarStyle={styles.avatarStyle}
+            rounded
+            />
+          </View>
         </View>
       )}
     </AuthContext.Consumer>
@@ -44,6 +33,13 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
   },
+  avatarStyle:{
+    backgroundColor:"red",
+    alignSelf:"center",
+    alignContent:"center",
+    flex: 1, 
+    justifyContent: "center",
+  }
 });
 
 export default ProfileScreen;

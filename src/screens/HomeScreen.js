@@ -15,6 +15,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import * as firebase from "firebase";
 import "firebase/firestore";
 
+
 const HomeScreen = (props) => {
   /*const netinfo = useNetInfo();
   if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
