@@ -1,11 +1,16 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { View } from "react-native";
 import { Card, Button, Text, Avatar } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import * as firebase from "firebase";
+import "firebase/firestore";
+import CommentScreen from "./../screens/CommentScreen";
 
 const PostCard = (props) => {
+
   return (
     <Card>
       <View
@@ -39,10 +44,32 @@ const PostCard = (props) => {
           title=" Like "
           icon={<Ionicons name="md-heart-empty" size={24} color="black" />}
         />
-        <Button 
-        type="outline" 
-        title=" Comment " 
-        icon={<FontAwesome name="comments" size={24} color="black" />}/>
+        <Button
+          type="outline"
+          title=" Comment "
+          icon={<FontAwesome name="comments" size={24} color="black" />}
+          onPress={function () {
+            props.navigation.navigate("Comment");
+          }}
+        />
+        <Button
+          type="outline"
+          title=" Delete "
+          icon={<AntDesign name="delete" size={24} color="black" />}
+          onPress={(doc) => {
+            firebase
+              .firestore()
+              .collection("posts")
+              .doc(doc.id)
+              .delete()
+              .then(function () {
+                alert("Deleted the post with id:", doc.id);
+              }).catch((error) => {
+                alert(error);
+              })
+
+          }}
+        />
       </View>
     </Card>
   );
