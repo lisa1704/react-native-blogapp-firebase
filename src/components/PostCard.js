@@ -49,7 +49,7 @@ const PostCard = (props) => {
           title=" Comment "
           icon={<FontAwesome name="comments" size={24} color="black" />}
           onPress={function () {
-            props.navigation.navigate("Comment");
+            //props.navigation.navigate("Comment");
           }}
         />
         <Button

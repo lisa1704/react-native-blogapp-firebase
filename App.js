@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStackScreen from "./src/navigation/AuthStack";
 import AppDrawerScreen from "./src/navigation/AppDrawer";
-import AppStackScreen from "./src/navigation/AppStack";
 import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
 import * as firebase from "firebase";
 import CommentScreen from "./src/screens/CommentScreen";
@@ -23,16 +22,7 @@ var firebaseConfig = {
 if(!firebase.apps.length){
 firebase.initializeApp(firebaseConfig);
 }
-const PostStack = createStackNavigator();
 
-const PostStackScren=()=>{
-  return(
-    <PostStack.Navigator>
-      <PostStack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
-      <PostStack.Screen name="Comment" component={CommentScreen} options={{headerShown:false}}/>
-    </PostStack.Navigator>
-  );
-};
 
 function App() {
   return (
@@ -41,7 +31,7 @@ function App() {
         {(auth) => (
           <NavigationContainer>
             {auth.IsLoggedIn ? <AppDrawerScreen />: <AuthStackScreen />}
-             <AppStackScreen/>
+             
           </NavigationContainer>
         )}
       </AuthContext.Consumer>

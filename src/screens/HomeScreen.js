@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   FlatList,
-  ActivityIndicator,
+  ActivityIndicator, TouchableOpacity, TouchableNativeFeedback, Alert
 } from "react-native";
 import { Card, Button, Text, Avatar, Input } from "react-native-elements";
 import PostCard from "./../components/PostCard";
@@ -30,7 +30,7 @@ const HomeScreen = (props) => {
     firebase
       .firestore()
       .collection('posts')
-      .orderBy("createdAt","desc")
+      .orderBy("createdAt", "desc")
       .onSnapshot((querySnapshot) => {
         let p_arr = [];
         querySnapshot.forEach((doc) => {
@@ -98,11 +98,40 @@ const HomeScreen = (props) => {
             data={posts}
             renderItem={({ item }) => {
               return (
-                <PostCard
-                  author={item.data.author}
-                  title={item.id}
-                  body={item.data.body}
-                />
+                <TouchableOpacity
+                  onLongPress={() => {
+                    Alert.alert("Delete the post?", "Press OK to delete",
+                      [{
+                        text: "Cancel",
+                        onPress: () => { alert("Cancel Pressed") },
+                        style: "cancel"
+                      },
+                      {
+                        text:"OK",
+                        onPress:()=>{
+                          if(auth.CurrentUser.uid== item.data.userId){
+                            firebase
+                               .firestore()
+                               .collection("posts")
+                               .doc(item.id)
+                               .delete()
+                          }
+                          else {
+                            alert("You're not the author of this post");
+                          }
+                        }
+                      }
+                      ],
+                      {cancelable: false}
+                    );
+                  }}
+                >
+                  <PostCard
+                    author={item.data.author}
+                    title={item.id}
+                    body={item.data.body}
+                  />
+                </TouchableOpacity>
               );
             }}
           />
