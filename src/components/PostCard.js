@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { AuthContext } from "./../providers/AuthProvider";
+import PostScreen from "./../screens/PostScreen";
 
 
 const PostCard = (props) => {
@@ -55,10 +56,11 @@ const PostCard = (props) => {
                 {props.author}
               </Text>
             </View>
-            <Text style={{ fontStyle: "italic" }}> {props.docid}</Text>
+           
             <Text
               style={{
                 paddingVertical: 10,
+                fontSize:18
               }}
             >
               {props.postbody}
@@ -121,7 +123,7 @@ const PostCard = (props) => {
                 title=" Comment "
                 icon={<FontAwesome name="comments" size={24} color="black" />}
                 onPress={function () {
-                  stack.navigate('PostScreen', { name: props.author, post: props.body, docid: props.docid, likecount: likes });
+                  stack.navigate("PostScreen", { name: props.author, date: props.date, post: props.postbody, docid: props.docid, likecount: likes });
                 }}
               />
 

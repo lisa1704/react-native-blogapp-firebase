@@ -6,7 +6,6 @@ import AppDrawerScreen from "./src/navigation/AppDrawer";
 import PostScreen from "./src/screens/PostScreen";
 import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
 import * as firebase from "firebase";
-import CommentScreen from "./src/screens/PostScreen";
 //import firebase from 'firebase/app'
 
 
