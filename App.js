@@ -3,9 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStackScreen from "./src/navigation/AuthStack";
 import AppDrawerScreen from "./src/navigation/AppDrawer";
+import PostScreen from "./src/screens/PostScreen";
 import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
 import * as firebase from "firebase";
-import CommentScreen from "./src/screens/CommentScreen";
+import CommentScreen from "./src/screens/PostScreen";
 //import firebase from 'firebase/app'
 
 
@@ -23,6 +24,16 @@ if(!firebase.apps.length){
 firebase.initializeApp(firebaseConfig);
 }
 
+
+const HomeStack = createStackNavigator();
+const HomeStackScreen=()=>{
+  return(
+    <HomeStack.Navigator initialRouteName="Home">
+      <HomeStack.Screen name="Home" component={Home} options={{headerShown: false}}  />
+      <HomeStack.Screen name ="PostScreen" component= {PostScreen} options={{headerShown: false}}/>
+    </HomeStack.Navigator>
+  );
+};
 
 function App() {
   return (

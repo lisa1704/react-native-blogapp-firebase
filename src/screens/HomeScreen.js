@@ -59,6 +59,7 @@ const HomeScreen = (props) => {
             DrawerFunction={() => {
               props.navigation.toggleDrawer();
             }}
+            //Header={route.name}
           />
           <Card>
             <Input
@@ -103,7 +104,7 @@ const HomeScreen = (props) => {
                     Alert.alert("Delete the post?", "Press OK to delete",
                       [{
                         text: "Cancel",
-                        onPress: () => { alert("Cancel Pressed") },
+                        onPress: () => { console.log("Cancel Pressed") },
                         style: "cancel"
                       },
                       {
@@ -128,8 +129,9 @@ const HomeScreen = (props) => {
                 >
                   <PostCard
                     author={item.data.author}
-                    title={item.id}
-                    body={item.data.body}
+                    postbody={item.data.body}
+                    date={item.data.createdAt}
+                    docid={item.id}
                   />
                 </TouchableOpacity>
               );

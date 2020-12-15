@@ -2,7 +2,7 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeTabScreen from "./../navigation/HomeTab";
 import ProfileScreen from "./../screens/ProfileScreen";
-import CommentScreen from "./../screens/CommentScreen"
+import CommentScreen from "../screens/PostScreen"
 
 const AppDrawer = createDrawerNavigator();
 
