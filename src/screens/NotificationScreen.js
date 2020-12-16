@@ -1,9 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, Card, Avatar } from "react-native-elements";
 import HeaderHome from "./../components/HeaderHome";
 import { AuthContext } from "../providers/AuthProvider";
+import { useRoute } from '@react-navigation/native';
+import * as firebase from "firebase";
+import NotificationCard from "./../components/NotificationCard";
+import "firebase/firestore";
+import { FlatList } from "react-native-gesture-handler";
+
+
 const NotificationScreen = (props) => {
+  const [notifArr, setNotifArr] = useState([]);
+  const route = useRoute();
+
+  const loadNotifications = async () => {
+    firebase
+      .firestore()
+      .collection("notification")
+      .orderBy("created_at", "desc")
+      .onSnapshot((querySnapshot) => {
+        let nArr = [];
+        querySnapshot.forEach((doc) => {
+          nArr.push({
+            id: doc.id,
+            data: doc.data()
+          });
+        });
+        setNotifArr(nArr);
+      }).catch((error) => {
+        alert(error);
+      });
+
+  };
+  useEffect(() => {
+    loadNotifications();
+  }, []);
+
   return (
     <AuthContext.Consumer>
       {(auth) => (
@@ -12,24 +45,19 @@ const NotificationScreen = (props) => {
             DrawerFunction={() => {
               props.navigation.toggleDrawer();
             }}
+            Header={route.name}
           />
-          <Card>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Avatar
-                containerStyle={{ backgroundColor: "cyan" }}
-                rounded
-                icon={{
-                  name: "thumbs-o-up",
-                  type: "font-awesome",
-                  color: "black",
-                }}
-                activeOpacity={1}
+          <FlatList
+          data={notifArr}
+          renderItem={({item})=>{
+            return(
+              <NotificationCard
+              author={item.data.author}
+              type={item.data.type}
               />
-              <Text style={{ paddingHorizontal: 10 }}>
-                Pam Beesley Liked Your Post.
-              </Text>
-            </View>
-          </Card>
+            );
+          }}
+          />
         </View>
       )}
     </AuthContext.Consumer>
