@@ -5,6 +5,7 @@ import { Card, Button, Text, Avatar } from "react-native-elements";
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from '@expo/vector-icons';
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { AuthContext } from "./../providers/AuthProvider";
@@ -47,20 +48,20 @@ const PostCard = (props) => {
               }}
             >
               <Avatar
-                containerStyle={{ backgroundColor: "#ffab91" }}
+                containerStyle={{ backgroundColor: "#4caf50" }}
                 rounded
                 icon={{ name: "user", type: "font-awesome", color: "black" }}
                 activeOpacity={1}
               />
-              <Text h4Style={{ padding: 10 }} h4>
+              <Text h4Style={{ padding: 10, fontSize: 20 }} h4>
                 {props.author}
               </Text>
             </View>
-           
+
             <Text
               style={{
                 paddingVertical: 10,
-                fontSize:18
+                fontSize: 18
               }}
             >
               {props.postbody}
@@ -69,8 +70,11 @@ const PostCard = (props) => {
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <Button
                 type="outline"
-                title={"Like (" + likes.toString() + ")"}
-                icon={<Ionicons name="md-heart-empty" size={24} color="black" />}
+                buttonStyle={{ borderRadius: 100, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: "#fff" }}
+                title={"  Like (" + likes.toString() + ")"}
+                titleStyle={{ fontSize: 16, color: "black" }}
+                raised
+                icon={<AntDesign name="heart" size={24} color="black" />}
                 onPress={function () {
                   if (press == false) {
                     setPress(true);
@@ -120,7 +124,11 @@ const PostCard = (props) => {
               />
               <Button
                 type="outline"
+                buttonStyle={{ borderRadius: 100, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: "#fff" }}
                 title=" Comment "
+                titleStyle={{ fontSize: 16, color: "black" }}
+                raised
+                containerStyle={{color:"black"}}
                 icon={<FontAwesome name="comments" size={24} color="black" />}
                 onPress={function () {
                   stack.navigate("PostScreen", { name: props.author, date: props.date, post: props.postbody, docid: props.docid, likecount: likes });

@@ -20,20 +20,24 @@ const ProfileScreen = (props) => {
             DrawerFunction={() => {
               props.navigation.toggleDrawer();
             }}
-            HeaderHome={route.name}
+            Header={route.name}
           />
           <View style={{ justifyContent: "center", alignContent: "center", alignSelf: "center" }}>
             <PhotoComponent />
           </View>
+          <Text style={styles.space}></Text>
           <Card containerStyle={styles.cardViewStyle}>
-            <Text style={{ fontSize: 25, color: 'black' }}> Name: {auth.CurrentUser.displayName} </Text>
-            <Text style={{ fontSize: 25, color: 'black' }}> Email: {auth.CurrentUser.email} </Text>
-            <Text style={{ fontSize: 25, color: 'black' }}> User ID: {auth.CurrentUser.uid} </Text>
+            <Text style={{ fontSize: 20, color: 'black' }}>Name: {auth.CurrentUser.displayName} </Text>
+            <Text style={styles.space}></Text>
+            <Text style={{ fontSize: 20, color: 'black' }}>Email: {auth.CurrentUser.email} </Text>
+            <Text style={styles.space}></Text>
+            <Text style={{ fontSize: 20, color: 'black' }}>User ID: {auth.CurrentUser.uid} </Text>
+            <Text style={styles.space}></Text>
           </Card>
-          <Button buttonStyle={{ backgroundColor: 'black', marginTop: 40, width: 250, borderRadius: 10, justifyContent: "center", alignSelf: "center", height: 42 }}
+          <Button buttonStyle={{ backgroundColor: 'orange', marginTop: 10, width: 250, borderRadius: 100, justifyContent: "center", alignSelf: "center", height: 42 }}
             icon={<MaterialIcons name="delete" size={24} color="white" />}
             title=' Delete Profile'
-            titleStyle={{ color: 'black' }}
+            titleStyle={{ color: 'white' }}
             type='solid'
             onPress={function () {
               firebase
@@ -41,7 +45,6 @@ const ProfileScreen = (props) => {
                 .collection("users")
                 .doc(auth.CurrentUser.uid)
                 .delete()
-
               auth.setIsLoggedIn(false);
               auth.setCurrentUser({});
             }}
@@ -69,11 +72,18 @@ const styles = StyleSheet.create({
   },
   cardViewStyle: {
     borderRadius: 10,
-    elevation: 5,
+    elevation: 10,
     height: 160,
-    width: 330,
+    width: 400,
     marginTop: 30,
+    marginBottom:30,
+    marginVertical:10,
+    alignContent:"center",
+    alignSelf:"center"
   },
+  space:{
+    marginTop:10
+  }
 });
 
 export default ProfileScreen;

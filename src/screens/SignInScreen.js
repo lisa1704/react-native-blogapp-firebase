@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet,Image } from "react-native";
 import { Input, Button, Card } from "react-native-elements";
 import { FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
@@ -16,12 +16,14 @@ const SignInScreen = (props) => {
       <AuthContext.Consumer>
         {(auth) => (
           <View style={styles.viewStyle}>
+            <Image source={require('G:/3-2 2020/Mobile & Web Dev/Social App with firebase/react-native-blogapp-firebase/assets/logo2.png')}
+            style = {{ width: 200, height: 200, alignSelf:"center" }}/>
             <Card>
               <Card.Title>Welcome to My Blog!</Card.Title>
               <Card.Divider />
               <Input
                 leftIcon={
-                  <FontAwesome name="envelope" size={24} color="black" />
+                  <FontAwesome name="envelope" size={24} color="#ff9800" />
                 }
                 placeholder="E-mail Address"
                 onChangeText={function (currentInput) {
@@ -31,7 +33,7 @@ const SignInScreen = (props) => {
 
               <Input
                 placeholder="Password"
-                leftIcon={<Feather name="key" size={24} color="black" />}
+                leftIcon={<Feather name="key" size={24} color="#ff9800" />}
                 secureTextEntry={true}
                 onChangeText={function (currentInput) {
                   setPassword(currentInput);
@@ -41,27 +43,30 @@ const SignInScreen = (props) => {
               <Button
                 icon={<AntDesign name="login" size={24} color="white" />}
                 title="  Sign In!"
-                type="solid"
-                onPress={()=>{
+                raised
+                buttonStyle={{ borderRadius: 100, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: "#ff9800" }}
+                onPress={() => {
                   setIsLoading(true);
                   firebase
-                  .auth()
-                  .signInWithEmailAndPassword(Email,Password)
-                  .then((userCreds)=>{
-                    setIsLoading(false);
-                    auth.setIsLoggedIn(true);
-                    auth.setCurrentUser(userCreds.user);
-                  })
-                  .catch((error)=>{
-                    setIsLoading(false);
-                    alert(error);
-                  })
+                    .auth()
+                    .signInWithEmailAndPassword(Email, Password)
+                    .then((userCreds) => {
+                      setIsLoading(false);
+                      auth.setIsLoggedIn(true);
+                      auth.setCurrentUser(userCreds.user);
+                    })
+                    .catch((error) => {
+                      setIsLoading(false);
+                      alert(error);
+                    })
                 }}
               />
               <Button
                 type="clear"
-                icon={<AntDesign name="user" size={24} color="dodgerblue" />}
+                buttonStyle={{ borderRadius: 100, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor: "white" }}
+                icon={<AntDesign name="user" size={24} color="#ff9800" />}
                 title="  Don't have an account?"
+                titleStyle={{color:"#ff9800"}}
                 onPress={function () {
                   props.navigation.navigate("SignUp");
                 }}
@@ -78,7 +83,7 @@ const styles = StyleSheet.create({
   viewStyle: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#4bacb8",
+    backgroundColor: "#f0f0f0",
   },
 });
 export default SignInScreen;

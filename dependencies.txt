@@ -5,3 +5,7 @@ expo install react-native-reanimated react-native-gesture-handler react-native-s
 npm install react-native-elements
 expo install firebase
 expo install expo-image-picker
+
+
+
+expo r -c

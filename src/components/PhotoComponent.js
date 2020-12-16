@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 
 const PhotoComponent = () => {
-    const [image, setImage] = useState( 'https://dummyimage.com/200x300/e0e0e0/e8e8e8.jpg&text=upload');
+    const [image, setImage] = useState( 'https://dummyimage.com/200x220/c7c1c7/000000.jpg&text=add+image');
 
     useEffect(() => {
         (async () => {
@@ -36,15 +36,10 @@ const PhotoComponent = () => {
         
            < View style={{width:200,justifyContent:"center",alignContent:"center",alignSelf:"center",height:220,marginTop:10}}>
             <TouchableOpacity
-            
             onPress={pickImage}
             >
-
-
-                {image && <Image source={{ uri: image }} style={styles.photoStyle} />}
-
+            {image && <Image source={{ uri: image }} style={styles.photoStyle} />}
             </TouchableOpacity>
-
         </View>
     );
 }

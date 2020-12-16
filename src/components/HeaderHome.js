@@ -7,12 +7,13 @@ const HeaderHome = (props) => {
     <AuthContext.Consumer>
       {(auth) => (
         <Header
+          placement="left"
           leftComponent={{
             icon: "menu",
             color: "#fff",
             onPress: props.DrawerFunction,
           }}
-          centerComponent={{ text: "The Office", style: { color: "#fff" } }}
+          centerComponent={{ text: props.Header, style: { color: "#fff", fontSize: 18 } }}
           rightComponent={{
             icon: "lock-outline",
             color: "#fff",
@@ -29,6 +30,12 @@ const HeaderHome = (props) => {
                 })
             }
           }}
+          containerStyle={{
+            backgroundColor: '#ff9800',
+            justifyContent: 'space-around',
+          }}
+          statusBarProps={{ barStyle: 'light-content' }}
+          barStyle="light-content"
         />
       )}
     </AuthContext.Consumer>

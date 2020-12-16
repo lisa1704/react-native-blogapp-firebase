@@ -14,13 +14,11 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useNetInfo } from "@react-native-community/netinfo";
 import * as firebase from "firebase";
 import "firebase/firestore";
+import { useRoute } from "@react-navigation/native";
 
 
 const HomeScreen = (props) => {
-  /*const netinfo = useNetInfo();
-  if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
-    alert("No Internet!");
-  } */
+  const route= useRoute();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
@@ -59,11 +57,12 @@ const HomeScreen = (props) => {
             DrawerFunction={() => {
               props.navigation.toggleDrawer();
             }}
-            //Header={route.name}
+            Header={route.name}
           />
           <Card>
             <Input
               placeholder="What's On Your Mind?"
+              inputStyle={{fontSize:18}}
               leftIcon={<Entypo name="pencil" size={24} color="black" />}
               onChangeText={(currentText) => {
                 setInput(currentText);
@@ -71,7 +70,8 @@ const HomeScreen = (props) => {
             />
             <Button
               title="Post"
-              type="outline"
+              raised
+              buttonStyle={{borderRadius:100, marginLeft: 0, marginRight: 0, marginBottom: 0, backgroundColor:"#ff9800"}}
               onPress={function () {
                 setLoading(false);
                 firebase
