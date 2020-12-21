@@ -3,9 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStackScreen from "./src/navigation/AuthStack";
 import AppDrawerScreen from "./src/navigation/AppDrawer";
+import HomeTabScreen from "./src/navigation/HomeTab";
 import PostScreen from "./src/screens/PostScreen";
 import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
 import * as firebase from "firebase";
+import HomeScreen from "./src/screens/HomeScreen";
 //import firebase from 'firebase/app'
 
 
@@ -28,7 +30,7 @@ const HomeStack = createStackNavigator();
 const HomeStackScreen=()=>{
   return(
     <HomeStack.Navigator initialRouteName="Home">
-      <HomeStack.Screen name="Home" component={Home} options={{headerShown: false}}  />
+      <HomeStack.Screen name="Home" component={HomeTabScreen} options={{headerShown: false}}  />
       <HomeStack.Screen name ="PostScreen" component= {PostScreen} options={{headerShown: false}}/>
     </HomeStack.Navigator>
   );

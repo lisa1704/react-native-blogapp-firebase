@@ -128,10 +128,17 @@ const PostCard = (props) => {
                 title=" Comment "
                 titleStyle={{ fontSize: 16, color: "black" }}
                 raised
-                containerStyle={{color:"black"}}
+                containerStyle={{ color: "black" }}
                 icon={<FontAwesome name="comments" size={24} color="black" />}
                 onPress={function () {
-                  stack.navigate("PostScreen", { name: props.author, date: props.date, post: props.postbody, docid: props.docid, likecount: likes });
+                  stack.navigate("PostScreen",
+                    {
+                      name: props.author,
+                      date: props.date,
+                      post: props.postbody,
+                      docid: props.docid,
+                      likecount: likes
+                    });
                 }}
               />
 
