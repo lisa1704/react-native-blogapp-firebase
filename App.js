@@ -3,12 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStackScreen from "./src/navigation/AuthStack";
 import AppDrawerScreen from "./src/navigation/AppDrawer";
-import HomeTabScreen from "./src/navigation/HomeTab";
-import PostScreen from "./src/screens/PostScreen";
+
 import { AuthContext, AuthProvider } from "./src/providers/AuthProvider";
 import * as firebase from "firebase";
-import HomeScreen from "./src/screens/HomeScreen";
-//import firebase from 'firebase/app'
+
 
 
 var firebaseConfig = {
@@ -25,17 +23,6 @@ if(!firebase.apps.length){
 firebase.initializeApp(firebaseConfig);
 }
 
-
-const HomeStack = createStackNavigator();
-const HomeStackScreen=()=>{
-  return(
-    <HomeStack.Navigator initialRouteName="Home">
-      <HomeStack.Screen name="Home" component={HomeTabScreen} options={{headerShown: false}}  />
-      <HomeStack.Screen name ="PostScreen" component= {PostScreen} options={{headerShown: false}}/>
-    </HomeStack.Navigator>
-  );
-};
-
 function App() {
   return (
     <AuthProvider>
@@ -43,7 +30,6 @@ function App() {
         {(auth) => (
           <NavigationContainer>
             {auth.IsLoggedIn ? <AppDrawerScreen />: <AuthStackScreen />}
-             
           </NavigationContainer>
         )}
       </AuthContext.Consumer>

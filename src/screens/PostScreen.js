@@ -10,6 +10,7 @@ import PostAuthor from "./../components/PostAuthor";
 import { FlatList } from "react-native-gesture-handler";
 import { TouchableOpacity } from "react-native";
 import CommentCard from "../components/CommentCard";
+import { useRoute } from '@react-navigation/native';
 
 const PostScreen = (props) => {
     const [postComment, setPostComment] = useState("");
@@ -61,7 +62,7 @@ const PostScreen = (props) => {
                         postbody={props.route.params.post}
                         date={props.route.params.date}
                         likecount={props.route.params.likecount}
-                        commentcount={comment}
+                        commentcount={commentCounter}
                     />
                     <Card style={styles.cardViewStyle}>
                         <View>
